@@ -2,18 +2,17 @@
 
 Summary:	Cairo - multi-platform 2D graphics library
 Name:		cairo
-Version:	1.12.2
+Version:	1.12.4
 License:	LGPL v2.1 or MPL v1.1
 Group:		Libraries
 %if "%{gitver}" != "%{nil}"
 Release:	0.%{gitver}.1
 Source:		http://cgit.freedesktop.org/cairo/snapshot/cairo-%{gitver}.tar.bz2
 %else
-Release:	2
+Release:	1
 Source0:	http://cairographics.org/releases/%{name}-%{version}.tar.xz
-# Source0-md5:	87649eb75789739d517c743e94879e51
+# Source0-md5:	a64bb8774a1e476e5cdd69e635794dfb
 %endif
-Patch0:		%{name}-link.patch
 URL:		http://cairographics.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -104,8 +103,6 @@ sed -i -e 's/-no-undefined/-avoid-version -module -no-undefined/g' \
 	util/cairo-trace/Makefile.am	\
 	util/cairo-fdr/Makefile.am	\
 	util/cairo-sphinx/Makefile.am
-
-%patch0 -p1
 
 %build
 %if "%{gitver}" != "%{nil}"
