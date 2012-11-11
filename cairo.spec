@@ -9,7 +9,7 @@ Group:		Libraries
 Release:	0.%{gitver}.1
 Source:		http://cgit.freedesktop.org/cairo/snapshot/cairo-%{gitver}.tar.bz2
 %else
-Release:	1
+Release:	2
 Source0:	http://cairographics.org/releases/%{name}-%{version}.tar.xz
 # Source0-md5:	8b3dcade859c44fb7e56fc68edfe9a45
 %endif
@@ -23,7 +23,7 @@ BuildRequires:	gtk-doc
 %endif
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
-BuildRequires:	pixman-devel
+BuildRequires:	pixman-devel >= 0.28.0
 BuildRequires:	pkg-config
 BuildRequires:	xcb-util-devel
 BuildRequires:	xorg-libXrender-devel
