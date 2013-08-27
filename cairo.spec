@@ -2,16 +2,16 @@
 
 Summary:	Cairo - multi-platform 2D graphics library
 Name:		cairo
-Version:	1.12.14
+Version:	1.12.16
 License:	LGPL v2.1 or MPL v1.1
 Group:		Libraries
 %if "%{gitver}" != "%{nil}"
 Release:	0.%{gitver}.1
 Source:		http://cgit.freedesktop.org/cairo/snapshot/cairo-%{gitver}.tar.bz2
 %else
-Release:	2
+Release:	3
 Source0:	http://cairographics.org/releases/%{name}-%{version}.tar.xz
-# Source0-md5:	27b634113d0f52152d60ae8e2ec7daa7
+# Source0-md5:	a1304edcdc99282f478b995ee5f8f854
 %endif
 URL:		http://cairographics.org/
 BuildRequires:	autoconf
@@ -23,7 +23,7 @@ BuildRequires:	gtk-doc
 %endif
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
-BuildRequires:	pixman-devel >= 0.28.0
+BuildRequires:	pixman-devel
 BuildRequires:	pkg-config
 BuildRequires:	xcb-util-devel
 BuildRequires:	xorg-libXrender-devel
@@ -119,7 +119,12 @@ touch ChangeLog
 %configure \
 	--disable-silent-rules	\
 	--disable-static	\
+	--enable-gl		\
+	--enable-gobject	\
+	--enable-pdf		\
+	--enable-ps		\
 	--enable-ps=yes		\
+	--enable-svg		\
 	--enable-tee=yes	\
 	--enable-xcb=yes	\
 	--enable-xlib=yes	\
