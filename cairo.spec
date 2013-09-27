@@ -9,7 +9,7 @@ Group:		Libraries
 Release:	0.%{gitver}.1
 Source:		http://cgit.freedesktop.org/cairo/snapshot/cairo-%{gitver}.tar.bz2
 %else
-Release:	3
+Release:	4
 Source0:	http://cairographics.org/releases/%{name}-%{version}.tar.xz
 # Source0-md5:	a1304edcdc99282f478b995ee5f8f854
 %endif
@@ -99,10 +99,13 @@ Cairo API documentation.
 %setup -q
 %endif
 
-sed -i -e 's/-no-undefined/-avoid-version -module -no-undefined/g' \
+%{__sed} -i 's/-no-undefined/-avoid-version -module -no-undefined/g' \
 	util/cairo-trace/Makefile.am	\
 	util/cairo-fdr/Makefile.am	\
 	util/cairo-sphinx/Makefile.am
+
+# diable tests
+%{__sed} -i 's/test perf/perf/g' Makefile.am
 
 %build
 %if "%{gitver}" != "%{nil}"
