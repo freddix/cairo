@@ -9,15 +9,18 @@ Group:		Libraries
 Release:	0.%{gitver}.1
 Source:		http://cgit.freedesktop.org/cairo/snapshot/cairo-%{gitver}.tar.bz2
 %else
-Release:	4
+Release:	5
 Source0:	http://cairographics.org/releases/%{name}-%{version}.tar.xz
 # Source0-md5:	a1304edcdc99282f478b995ee5f8f854
 %endif
 URL:		http://cairographics.org/
+BuildRequires:	EGL-devel
+BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel
+BuildRequires:	glib-devel
 %if "%{gitver}" != "%{nil}"
 BuildRequires:	gtk-doc
 %endif
@@ -29,6 +32,9 @@ BuildRequires:	xcb-util-devel
 BuildRequires:	xorg-libXrender-devel
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# https://bugs.freedesktop.org/show_bug.cgi?id=77060
+%define		specflags   -fno-lto
 
 %description
 Cairo provides anti-aliased vector-based rendering for X. Paths
@@ -122,16 +128,16 @@ touch ChangeLog
 %configure \
 	--disable-silent-rules	\
 	--disable-static	\
+	--enable-egl		\
 	--enable-gl		\
 	--enable-gobject	\
 	--enable-pdf		\
 	--enable-ps		\
-	--enable-ps=yes		\
 	--enable-svg		\
-	--enable-tee=yes	\
-	--enable-xcb=yes	\
-	--enable-xlib=yes	\
-	--enable-xml=yes	\
+	--enable-tee		\
+	--enable-xcb		\
+	--enable-xlib		\
+	--enable-xml		\
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
 
@@ -141,7 +147,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/cairo/*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/{,cairo/}*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
