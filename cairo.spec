@@ -1,8 +1,8 @@
-%define		gitver	%{nil}
+%define		gitver	9e836253563bc1b9e55c937c2c289cf13a6f6780
 
 Summary:	Cairo - multi-platform 2D graphics library
 Name:		cairo
-Version:	1.12.16
+Version:	1.12.18
 License:	LGPL v2.1 or MPL v1.1
 Group:		Libraries
 %if "%{gitver}" != "%{nil}"
@@ -11,7 +11,7 @@ Source:		http://cgit.freedesktop.org/cairo/snapshot/cairo-%{gitver}.tar.bz2
 %else
 Release:	5
 Source0:	http://cairographics.org/releases/%{name}-%{version}.tar.xz
-# Source0-md5:	a1304edcdc99282f478b995ee5f8f854
+# Source0-md5:	fb0a46f799c0863e64770f4e6ce9ee04
 %endif
 URL:		http://cairographics.org/
 BuildRequires:	EGL-devel
@@ -32,9 +32,6 @@ BuildRequires:	xcb-util-devel
 BuildRequires:	xorg-libXrender-devel
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-# https://bugs.freedesktop.org/show_bug.cgi?id=77060
-%define		specflags   -fno-lto
 
 %description
 Cairo provides anti-aliased vector-based rendering for X. Paths
@@ -126,6 +123,7 @@ touch ChangeLog
 %{__automake} --gnu -Wall
 %{__autoconf}
 %configure \
+	--disable-lto		\
 	--disable-silent-rules	\
 	--disable-static	\
 	--enable-egl		\
