@@ -2,7 +2,7 @@
 
 Summary:	Multi-platform 2D graphics library
 Name:		cairo
-Version:	1.14.0
+Version:	1.14.2
 License:	LGPL v2.1 or MPL v1.1
 Group:		Libraries
 %if "%{gitver}" != "%{nil}"
@@ -11,7 +11,7 @@ Source:		http://cgit.freedesktop.org/cairo/snapshot/cairo-%{gitver}.tar.bz2
 %else
 Release:	1
 Source0:	http://cairographics.org/releases/%{name}-%{version}.tar.xz
-# Source0-md5:	fc3a5edeba703f906f2241b394f0cced
+# Source0-md5:	e1cdfaf1c6c995c4d4c54e07215b0118
 %endif
 URL:		http://cairographics.org/
 BuildRequires:	EGL-devel
